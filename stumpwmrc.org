@@ -1,0 +1,45 @@
+* =.stumpwmrc=
+
+I'm in geeks heaven! I read my mail in emacs, I chat in emacs -- I practically /live/ in emacs. I use firefox with keysnail. And now I discovered StumpWM.
+
+This file contains the few customizations I need right now.
+
+:PROPERTIES:
+:tangle:   ~/.stumpwmrc
+:END:
+
+** Start a terminal window
+
+=urxvtd=, the terminal emulation daemon, is started by my
+=gnome-session-properties= - start a client (=urxvtc=) with the normal
+terminal emulation keybindings.
+
+#+BEGIN_SRC common-lisp 
+(define-key *root-map*   (kbd "c") "run-term")
+(define-key *root-map*   (kbd "C-c") "run-term")
+
+(defcommand run-term () () 
+  (run-shell-command "exec /usr/bin/urxvtc"))
+#+END_SRC
+
+** Toggle the modeline
+
+#+BEGIN_SRC common-lisp
+(define-key *top-map* (kbd "H-m") "mode-line")
+#+END_SRC
+
+** Open the =stumpwm= repl
+
+#+BEGIN_SRC common-lips
+(define-key *top-map* (kbd "H-i") "colon")
+#+END_SRC
+
+** Start an emacsclient
+
+#+BEGIN_SRC common-lisp
+  (define-key *root-map* (kbd "e") "run-emacs")
+  (define-key *root-map* (kbd "C-e") "run-emacs")
+  
+  (defcommand run-emacs () ()
+    (run-shell-command "exec /usr/bin/emacsclient -c"))  
+#+END_SRC

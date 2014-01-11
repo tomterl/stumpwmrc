@@ -1,0 +1,3 @@
+* My stumpwm configuration
+
+Just the basics at the moment. Maybe a more complex setup will evolve...

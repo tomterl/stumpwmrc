@@ -69,12 +69,15 @@ terminal emulation keybindings.
 #+END_SRC
 ** =trayer= handling
 
-Position the panel in a group of its own.
+Position the panel in a group of its own. Use =Hyper p= to switch to
+it; =Hyper o= selects the group previously active.
 
 #+BEGIN_SRC common-lisp
   (gnewbg-float "Panel")
   (define-frame-preference "Panel"
     (0 nil nil :class "Panel"))
+  (define-key *top-map* (kbd "H-p") "gselect Panel")
+  (define-key *top-map* (kbd "H-o") "gother")
 #+END_SRC
 
 ** Hide the =gnome= desktop window

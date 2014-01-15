@@ -8,6 +8,30 @@ This file contains the few customizations I need right now.
 :tangle:   ~/.stumpwmrc
 :END:
 
+To make sure the stuff I add here doesn't mess with other cl code, it
+is common practice to use the =stumpwm= namespace for the
+configuration.
+
+#+BEGIN_SRC common-lisp
+(in-package :stumpwm)
+#+END_SRC
+
+** Setup swank/slime
+
+While using =stumpish= is ok, using slime/swank to interact with the
+wm is a much more general and cleaner way.
+
+#+BEGIN_SRC common-lisp
+(ql:quickload :swank)
+(defcommand swank () ()
+    (swank:create-server :port 4005
+                       :style swank:*communication-style*
+                       :dont-close t)
+  (echo-string (current-screen) 
+	       "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
+(swank)
+#+END_SRC
+
 ** Start a terminal window
 
 =urxvtd=, the terminal emulation daemon, is started by my
@@ -28,7 +52,7 @@ terminal emulation keybindings.
 (define-key *top-map* (kbd "H-m") "mode-line")
 #+END_SRC
 
-** Open the =stumpwm= repl
+** Open the =stumpwm= command line
 
 #+BEGIN_SRC common-lips
 (define-key *top-map* (kbd "H-i") "colon")
@@ -42,4 +66,13 @@ terminal emulation keybindings.
   
   (defcommand run-emacs () ()
     (run-shell-command "exec /usr/bin/emacsclient -c"))  
+#+END_SRC
+** =trayer= handling
+
+Position the panel in a group of its own.
+
+#+BEGIN_SRC common-lisp
+  (gnewbg-float "Panel")
+  (define-frame-preference "Panel"
+    (0 t t :class "Panel"))
 #+END_SRC

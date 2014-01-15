@@ -74,5 +74,13 @@ Position the panel in a group of its own.
 #+BEGIN_SRC common-lisp
   (gnewbg-float "Panel")
   (define-frame-preference "Panel"
-    (0 t t :class "Panel"))
+    (0 nil nil :class "Panel"))
+#+END_SRC
+
+** Hide the =gnome= desktop window
+
+#+BEGIN_SRC common-lisp
+  (gnewbg "Desktop")
+  (define-frame-preference "Desktop"
+    (0 nil nil :title "Desktop" :class "Nautilus"))
 #+END_SRC

@@ -60,7 +60,7 @@ CPU, network and date in the modeline
 (setf *screen-mode-line-format*
       (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
 #+END_SRC
-** Toggle the modeline
+*** Toggle the modeline
 
 #+BEGIN_SRC common-lisp
 (define-key *top-map* (kbd "H-m") "mode-line")

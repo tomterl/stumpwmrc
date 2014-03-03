@@ -22,6 +22,11 @@ configuration.
 (stumptray:add-mode-line-hooks)
 #+END_SRC
 
+** stumpwm window placement
+#+BEGIN_SRC common-lisp
+(setf *input-window-gravity* :center)
+(setf *message-window-gravity* :bottom-right)
+#+END_SRC
 ** Setup swank/slime
 
 While using =stumpish= is ok, using slime/swank to interact with the

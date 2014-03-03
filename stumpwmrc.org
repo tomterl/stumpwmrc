@@ -16,6 +16,12 @@ configuration.
 (in-package :stumpwm)
 #+END_SRC
 
+** use =stumptray.lisp=
+#+BEGIN_SRC common-lisp
+(load "/usr/local/share/stumpwm/lisp/stumptray.lisp")
+(stumptray:add-mode-line-hooks)
+#+END_SRC
+
 ** Setup swank/slime
 
 While using =stumpish= is ok, using slime/swank to interact with the
@@ -46,6 +52,14 @@ terminal emulation keybindings.
   (run-shell-command "exec /usr/bin/urxvtc"))
 #+END_SRC
 
+** Modeline
+CPU, network and date in the modeline
+#+BEGIN_SRC comon-lisp
+(load "/usr/local/share/stumpwm/lisp/net.lisp")
+(load "/usr/local/share/stumpwm/lisp/cpu.lisp")
+(setf *screen-mode-line-format*
+      (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
+#+END_SRC
 ** Toggle the modeline
 
 #+BEGIN_SRC common-lisp

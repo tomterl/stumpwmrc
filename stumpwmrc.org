@@ -63,6 +63,7 @@ terminal emulation keybindings.
 ** Modeline
 
 CPU, network and date in the modeline
+
 #+BEGIN_SRC comon-lisp
 (load "/usr/local/share/stumpwm/lisp/net.lisp")
 (load "/usr/local/share/stumpwm/lisp/cpu.lisp")

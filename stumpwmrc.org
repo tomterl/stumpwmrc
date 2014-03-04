@@ -17,16 +17,19 @@ configuration.
 #+END_SRC
 
 ** use =stumptray.lisp=
+
 #+BEGIN_SRC common-lisp
 (load "/usr/local/share/stumpwm/lisp/stumptray.lisp")
 (stumptray:add-mode-line-hooks)
 #+END_SRC
 
 ** stumpwm window placement
+
 #+BEGIN_SRC common-lisp
 (setf *input-window-gravity* :center)
 (setf *message-window-gravity* :bottom-right)
 #+END_SRC
+
 ** Setup swank/slime
 
 While using =stumpish= is ok, using slime/swank to interact with the
@@ -58,6 +61,7 @@ terminal emulation keybindings.
 #+END_SRC
 
 ** Modeline
+
 CPU, network and date in the modeline
 #+BEGIN_SRC comon-lisp
 (load "/usr/local/share/stumpwm/lisp/net.lisp")
@@ -86,6 +90,7 @@ CPU, network and date in the modeline
   (defcommand run-emacs () ()
     (run-shell-command "exec /usr/bin/emacsclient -c"))  
 #+END_SRC
+
 ** Hide the =gnome= desktop window
 
 #+BEGIN_SRC common-lisp

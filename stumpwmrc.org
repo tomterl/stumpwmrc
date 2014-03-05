@@ -70,6 +70,13 @@ CPU, network and date in the modeline
 (setf *screen-mode-line-format*
       (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
 #+END_SRC
+
+Refresh the modeline at least every 5 seconds.
+
+#+BEGIN_SRC comon-lisp
+(setf *mode-line-timeout* 5)
+#+END_SRC
+
 *** Toggle the modeline
 
 #+BEGIN_SRC common-lisp

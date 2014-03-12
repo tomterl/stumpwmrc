@@ -27,7 +27,7 @@ configuration.
 
 #+BEGIN_SRC common-lisp
 (setf *input-window-gravity* :center)
-(setf *message-window-gravity* :bottom-right)
+(setf *message-window-gravity* :center)
 #+END_SRC
 
 ** Setup swank/slime

@@ -106,13 +106,24 @@ Refresh the modeline at least every 5 seconds.
   (define-frame-preference "Desktop"
     (0 nil nil :title "Desktop" :class "Nautilus"))
 #+END_SRC
+
 ** Emacs
+
+*** Send key sequences to emacs
+
+#+BEGIN_SRC common-lisp
+  (defmacro emacs-key-sequence (keys)
+    `(progn
+       (emacs)
+       (loop for key in ,keys do
+            (send-meta-key (current-screen) (kbd key)))))
+#+END_SRC
+
 *** Switch to the next tracking buffer
+
 #+BEGIN_SRC common-lisp
   (defcommand emacs-next-tracking-buffer () ()
-    (emacs)
-    (send-meta-key (current-screen) (kbd "C-c"))
-    (send-meta-key (current-screen) (kbd "C-SPC")))
+    (emacs-key-sequence '("C-c" "C-SPC")))
 #+END_SRC
 
 #+BEGIN_SRC common-lisp

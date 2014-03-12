@@ -141,3 +141,18 @@ Refresh the modeline at least every 5 seconds.
 #+BEGIN_SRC common-lisp
 (define-key *top-map* (kbd "H-t") "emacs-next-tracking-buffer")
 #+END_SRC
+
+*** Switch to the GNUS main buffer
+
+#+BEGIN_SRC common-lisp
+  (defcommand emacs-gnus-groups () ()
+    (emacs-command-key-sequence
+     '((:key . "C-x")
+       (:key . "b")
+       (:string . "*Group*")
+       (:key . "RET"))))
+#+END_SRC
+
+#+BEGIN_SRC common-lisp
+(define-key *top-map* (kbd "H-g") "emacs-gnus-groups")
+#+END_SRC

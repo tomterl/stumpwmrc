@@ -1,12 +1,11 @@
 * =.stumpwmrc=
+:PROPERTIES:
+:tangle:   ~/.stumpwmrc
+:END:
 
 I'm in geeks heaven! I read my mail in emacs, I chat in emacs -- I practically /live/ in emacs. I use firefox with keysnail. And now I discovered StumpWM.
 
 This file contains the few customizations I need right now.
-
-:PROPERTIES:
-:tangle:   ~/.stumpwmrc
-:END:
 
 To make sure the stuff I add here doesn't mess with other cl code, it
 is common practice to use the =stumpwm= namespace for the
@@ -91,6 +90,10 @@ Refresh the modeline at least every 5 seconds.
 
 ** Start an emacsclient
 
+The =emacs= daemon should be started by the
+=gnome-session-properties=. Start a graphical =emacsclient= with the
+standard =emacs= keybindings.
+
 #+BEGIN_SRC common-lisp
   (define-key *root-map* (kbd "e") "run-emacs")
   (define-key *root-map* (kbd "C-e") "run-emacs")
@@ -104,11 +107,10 @@ Refresh the modeline at least every 5 seconds.
 #+BEGIN_SRC common-lisp
   (gnewbg "Desktop")
   (define-frame-preference "Desktop"
-    (0 nil nil :title "Desktop" :class "Nautilus"))
+    (0 nil nil :title "Desktop"))
 #+END_SRC
 
 ** Emacs
-
 *** Send key sequences to emacs
 
 #+BEGIN_SRC common-lisp

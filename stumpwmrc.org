@@ -119,6 +119,18 @@ Refresh the modeline at least every 5 seconds.
             (send-meta-key (current-screen) (kbd key)))))
 #+END_SRC
 
+*** Send command/key sequences to emacs
+
+#+BEGIN_SRC common-lisp
+  (defmacro emacs-command-key-sequence (parts)
+    `(progn
+       (emacs)
+       (loop for part in ,parts do
+            (case (car part)
+              (:key (send-meta-key (current-screen) (kbd (cdr part))))
+              (:string (window-send-string (cdr part)))))))
+#+END_SRC
+
 *** Switch to the next tracking buffer
 
 #+BEGIN_SRC common-lisp

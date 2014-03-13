@@ -132,7 +132,7 @@ standard =emacs= keybindings.
               (:key (send-meta-key (current-screen) (kbd (cdr part))))
               (:string (window-send-string (cdr part)))))))
 #+END_SRC
-
+    
 *** Switch to the next tracking buffer
 
 #+BEGIN_SRC common-lisp
@@ -157,4 +157,29 @@ standard =emacs= keybindings.
 
 #+BEGIN_SRC common-lisp
 (define-key *top-map* (kbd "H-g") "emacs-gnus-groups")
+#+END_SRC
+** Change stumpwm behaviour
+#+BEGIN_SRC common-lisp
+  (defun run-or-raise-no-cycle (cmd props &optional (all-groups *run-or-raise-all-groups*) (all-screens *run-or-raise-all-screens*))
+    "Similar to run-or-raise, but doesn't cycle between matching windows."
+    (labels
+        ;; Raise the window win and select its frame.  For now, it
+        ;; does not select the screen.
+        ((goto-win (win)
+           (let* ((group (window-group win))
+                  (frame (window-frame win))
+                  (old-frame (tile-group-current-frame group)))
+             (focus-all win)
+             (unless (eq frame old-frame)
+               (show-frame-indicator group)))))
+      (let* ((matches (find-matching-windows props all-groups all-screens))
+             (win (first matches)))
+        (if win
+            (if (eq (type-of (window-group win)) 'float-group)
+                (group-focus-window (window-group win) win)
+                (goto-win win))
+            (run-shell-command cmd)))))
+  (defcommand emacs () ()
+              "Start or focus emacs, don't cycle between frames"
+              (run-or-raise-no-cycle "emacs" '(:class "Emacs")))
 #+END_SRC

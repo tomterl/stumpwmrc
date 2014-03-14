@@ -127,10 +127,15 @@ standard =emacs= keybindings.
   (defmacro emacs-command-key-sequence (parts)
     `(progn
        (emacs)
-       (loop for part in ,parts do
-            (case (car part)
-              (:key (send-meta-key (current-screen) (kbd (cdr part))))
-              (:string (window-send-string (cdr part)))))))
+       (block ecks-loop 
+         (loop for part in ,parts do
+              (case (car part)
+                (:key (send-meta-key (current-screen) (kbd (cdr part))))
+                (:string (window-send-string (cdr part)))
+                (t (progn 
+                     (message "Unknown sequence part (~s . ~s)"
+                              (car part) (cdr part))
+                     (return-from ecks-loop nil))))))))
 #+END_SRC
     
 *** Switch to the next tracking buffer

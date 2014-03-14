@@ -120,7 +120,7 @@ standard =emacs= keybindings.
        (loop for key in ,keys do
             (send-meta-key (current-screen) (kbd key)))))
 #+END_SRC
-
+    
 *** Send command/key sequences to emacs
 
 #+BEGIN_SRC common-lisp
@@ -188,5 +188,5 @@ standard =emacs= keybindings.
               (run-shell-command cmd)))))
     (defcommand emacs () ()
                 "Start or focus emacs, don't cycle between frames"
-                (run-or-raise-no-cycle "emacs" '(:class "Emacs")))
+                (run-or-raise-no-cycle "emacsclient -ca" '(:class "Emacs")))
 #+END_SRC

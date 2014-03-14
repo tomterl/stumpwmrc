@@ -130,8 +130,8 @@ standard =emacs= keybindings.
        (block ecks-loop 
          (loop for part in ,parts do
               (case (car part)
-                (:key (send-meta-key (current-screen) (kbd (cdr part))))
-                (:string (window-send-string (cdr part)))
+                ((or :key :k) (send-meta-key (current-screen) (kbd (cdr part))))
+                ((or :string :s) (window-send-string (cdr part)))
                 (t (progn 
                      (message "Unknown sequence part (~s . ~s)"
                               (car part) (cdr part))
@@ -154,10 +154,10 @@ standard =emacs= keybindings.
 #+BEGIN_SRC common-lisp
   (defcommand emacs-gnus-groups () ()
     (emacs-command-key-sequence
-     '((:key . "C-x")
-       (:key . "b")
-       (:string . "*Group*")
-       (:key . "RET"))))
+     '((:k . "C-x")
+       (:k . "b")
+       (:s . "*Group*")
+       (:k . "RET"))))
 #+END_SRC
 
 #+BEGIN_SRC common-lisp

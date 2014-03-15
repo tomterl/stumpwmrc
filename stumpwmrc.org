@@ -105,16 +105,19 @@ window-manager and emacs is in order.
 
 *** Command
 
+The =emacs= daemon should be started by the
+=gnome-session-properties=, but if not =-a ""= will do.
+
 #+BEGIN_SRC common-lisp
   (defvar *emacs-command* nil
     "Start an emacs client frame. Starts an emacs daemon if necessary.")
   (setf *emacs-command* "emacsclient -c -a \"\"")
 #+END_SRC
+
 *** Start an emacsclient
 
-The =emacs= daemon should be started by the
-=gnome-session-properties=. Start a graphical =emacsclient= with the
-standard =emacs= keybindings.
+Start a graphical =emacsclient= with stumpwm standard =emacs=
+keybindings.
 
 #+BEGIN_SRC common-lisp
   (define-key *root-map* (kbd "e") "run-emacs")

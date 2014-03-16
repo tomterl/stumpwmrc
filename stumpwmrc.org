@@ -130,28 +130,27 @@ keybindings.
 *** Send key sequences to emacs
 
 #+BEGIN_SRC common-lisp
-  (defmacro emacs-key-sequence (keys)
-    `(progn
-       (emacs)
-       (loop for key in ,keys do
-            (send-meta-key (current-screen) (kbd key)))))
+  (defun emacs-key-sequence (keys)
+    "Send key chords to emacs."
+    (emacs-command-key-sequence
+     (loop for key in keys collecting (cons :key  key))))
 #+END_SRC
     
 *** Send command/key sequences to emacs
 
 #+BEGIN_SRC common-lisp
-  (defmacro emacs-command-key-sequence (parts)
-    `(progn
-       (emacs)
-       (block ecks-loop 
-         (loop for part in ,parts do
-              (case (car part)
-                ((or :key :k) (send-meta-key (current-screen) (kbd (cdr part))))
-                ((or :string :s) (window-send-string (cdr part)))
-                (t (progn 
-                     (message "Unknown sequence part (~s . ~s)"
-                              (car part) (cdr part))
-                     (return-from ecks-loop nil))))))))
+  (defun emacs-command-key-sequence (parts)
+    "Send a combination of key chords and strings to emacs."
+    (progn
+      (emacs)
+      (let ((ops (list
+                  (cons :key  (lambda (key)
+                                (send-meta-key (current-screen) (kbd key))))
+                  (cons :string  (lambda (str)
+                                   (window-send-string str))))))
+        (loop for part in parts do
+             (let ((op (assoc (car part) ops)))
+               (funcall (cdr op) (cdr part)))))))
 #+END_SRC
     
 *** Switch to the next tracking buffer
@@ -162,7 +161,7 @@ keybindings.
 #+END_SRC
 
 #+BEGIN_SRC common-lisp
-(define-key *top-map* (kbd "H-t") "emacs-next-tracking-buffer")
+  (define-key *top-map* (kbd "H-t") "emacs-next-tracking-buffer")
 #+END_SRC
 
 *** Switch to the GNUS main buffer
@@ -170,14 +169,14 @@ keybindings.
 #+BEGIN_SRC common-lisp
   (defcommand emacs-gnus-groups () ()
     (emacs-command-key-sequence
-     '((:k . "C-x")
-       (:k . "b")
-       (:s . "*Group*")
-       (:k . "RET"))))
+     '((:key . "C-x")
+       (:key . "b")
+       (:string . "*Group*")
+       (:key . "RET"))))
 #+END_SRC
 
 #+BEGIN_SRC common-lisp
-(define-key *top-map* (kbd "H-g") "emacs-gnus-groups")
+  (define-key *top-map* (kbd "H-g") "emacs-gnus-groups")
 #+END_SRC
 ** Change stumpwm behaviour
 #+BEGIN_SRC common-lisp

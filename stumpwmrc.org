@@ -143,14 +143,14 @@ keybindings.
     "Send a combination of key chords and strings to emacs."
     (progn
       (emacs)
-      (let ((ops (list
+      (let ((ops (list ;; dispatch table 
                   (cons :key  (lambda (key)
                                 (send-meta-key (current-screen) (kbd key))))
                   (cons :string  (lambda (str)
                                    (window-send-string str))))))
-        (loop for part in parts do
-             (let ((op (assoc (car part) ops)))
-               (funcall (cdr op) (cdr part)))))))
+        (loop for part in parts do 
+             (let ((op (assoc (car part) ops))) ;; select dispatch function
+               (funcall (cdr op) (cdr part))))))) ;; dispatch 
 #+END_SRC
     
 *** Switch to the next tracking buffer

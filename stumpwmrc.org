@@ -67,7 +67,7 @@ CPU, network and date in the modeline
   (load "/usr/local/share/stumpwm/lisp/net.lisp")
   (load "/usr/local/share/stumpwm/lisp/cpu.lisp")
   (setf *screen-mode-line-format*
-        (list '(:eval (run-shell-command "date '+%R, %d.%m %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
+        (list '(:eval (run-shell-command "date '+%R, %d.%m. %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
 #+END_SRC
 
 Refresh the modeline at least every 5 seconds.

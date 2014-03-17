@@ -63,11 +63,11 @@ terminal emulation keybindings.
 
 CPU, network and date in the modeline
 
-#+BEGIN_SRC comon-lisp
-(load "/usr/local/share/stumpwm/lisp/net.lisp")
-(load "/usr/local/share/stumpwm/lisp/cpu.lisp")
-(setf *screen-mode-line-format*
-      (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
+#+BEGIN_SRC common-lisp
+  (load "/usr/local/share/stumpwm/lisp/net.lisp")
+  (load "/usr/local/share/stumpwm/lisp/cpu.lisp")
+  (setf *screen-mode-line-format*
+        (list '(:eval (run-shell-command "date '+%R, %d.%m %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
 #+END_SRC
 
 Refresh the modeline at least every 5 seconds.

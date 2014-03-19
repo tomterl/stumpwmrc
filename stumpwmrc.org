@@ -88,13 +88,12 @@ Refresh the modeline at least every 5 seconds.
 (define-key *top-map* (kbd "H-i") "colon")
 #+END_SRC
 
-
 ** Hide the =gnome= desktop window
 
 #+BEGIN_SRC common-lisp
   (gnewbg "Desktop")
   (define-frame-preference "Desktop"
-    (0 nil nil :title "Desktop"))
+    (0 nil t :class "Nautilus" :title "Desktop"))
 #+END_SRC
 
 ** Emacs

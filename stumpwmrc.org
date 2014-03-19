@@ -178,6 +178,8 @@ keybindings.
   (define-key *top-map* (kbd "H-g") "emacs-gnus-groups")
 #+END_SRC
 ** Change stumpwm behaviour
+*** Alter =emacs= to not cycle between windows
+
 #+BEGIN_SRC common-lisp
   (defun run-or-raise-no-cycle
       (cmd props &optional (all-groups *run-or-raise-all-groups*)
@@ -206,4 +208,8 @@ keybindings.
   (defcommand emacs () ()
     "Start or focus emacs, don't cycle between frames"
     (run-or-raise-no-cycle *emacs-command* '(:class "Emacs")))
+#+END_SRC
+*** Window information format
+#+BEGIN_SRC common-lisp
+  (setf *window-info-format* "%wx%h %n (%t - %c)")
 #+END_SRC

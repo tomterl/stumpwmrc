@@ -15,10 +15,14 @@ configuration.
 (in-package :stumpwm)
 #+END_SRC
 
+** Contrib dir
+#+BEGIN_SRC common-lisp
+(set-contrib-dir "/usr/local/share/stumpwm/lisp")
+#+END_SRC
 ** use =stumptray.lisp=
 
 #+BEGIN_SRC common-lisp
-(load "/usr/local/share/stumpwm/lisp/stumptray.lisp")
+(load-module "stumptray")
 (stumptray:add-mode-line-hooks)
 #+END_SRC
 
@@ -64,8 +68,8 @@ terminal emulation keybindings.
 CPU, network and date in the modeline
 
 #+BEGIN_SRC common-lisp
-  (load "/usr/local/share/stumpwm/lisp/net.lisp")
-  (load "/usr/local/share/stumpwm/lisp/cpu.lisp")
+  (load-module "net")
+  (load-module "cpu")
   (setf *screen-mode-line-format*
         (list '(:eval (run-shell-command "date '+%R, %d.%m %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
 #+END_SRC

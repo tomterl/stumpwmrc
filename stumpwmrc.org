@@ -12,7 +12,7 @@ is common practice to use the =stumpwm= namespace for the
 configuration.
 
 #+BEGIN_SRC common-lisp
-(in-package :stumpwm)
+(in-package :stumpwm-user)
 #+END_SRC
 
 ** Contrib dir
@@ -22,8 +22,10 @@ configuration.
 ** use =stumptray.lisp=
 
 #+BEGIN_SRC common-lisp
+(in-package :stumpwm)
 (load-module "stumptray")
 (stumptray:add-mode-line-hooks)
+(in-package :stumpwm-user
 #+END_SRC
 
 ** stumpwm window placement
@@ -148,9 +150,9 @@ keybindings.
       (emacs)
       (let ((ops (list ;; dispatch table 
                   (cons :key  (lambda (key)
-                                (send-meta-key (current-screen) (kbd key))))
+                                (stumpwm::send-meta-key (current-screen) (kbd key))))
                   (cons :string  (lambda (str)
-                                   (window-send-string str))))))
+                                   (stumpwm::window-send-string str))))))
         (loop for part in parts do 
              (let ((op (assoc (car part) ops))) ;; select dispatch function
                (funcall (cdr op) (cdr part))))))) ;; dispatch 
@@ -194,12 +196,12 @@ keybindings.
         ;; does not select the screen.
         ((goto-win (win)
            (let* ((group (window-group win))
-                  (frame (window-frame win))
-                  (old-frame (tile-group-current-frame group)))
-             (focus-all win)
+                  (frame (stumpwm::window-frame win))
+                  (old-frame (stumpwm::tile-group-current-frame group)))
+             (stumpwm::focus-all win)
              (unless (eq frame old-frame)
                (show-frame-indicator group)))))
-      (let* ((matches (find-matching-windows props all-groups all-screens))
+      (let* ((matches (stumpwm::find-matching-windows props all-groups all-screens))
              (win (if (member (current-window) matches)
                       (current-window)
                       (first matches))))
@@ -208,10 +210,10 @@ keybindings.
                 (group-focus-window (window-group win) win)
                 (goto-win win))
             (run-shell-command cmd)))))
-  
+  (in-package :stumpwm-user)
   (defcommand emacs () ()
     "Start or focus emacs, don't cycle between frames"
-    (run-or-raise-no-cycle *emacs-command* '(:class "Emacs")))
+    (run-or-raise-no-cycle stumpwm-user::*emacs-command* '(:class "Emacs")))
 #+END_SRC
 *** Window information format
 #+BEGIN_SRC common-lisp

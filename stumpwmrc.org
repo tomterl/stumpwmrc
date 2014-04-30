@@ -22,10 +22,10 @@ configuration.
 ** use =stumptray.lisp=
 
 #+BEGIN_SRC common-lisp
-(in-package :stumpwm)
-(load-module "stumptray")
-(stumptray:add-mode-line-hooks)
-(in-package :stumpwm-user
+  (in-package :stumpwm)
+  (load-module "stumptray")
+  (stumptray:add-mode-line-hooks)
+  (in-package :stumpwm-user)
 #+END_SRC
 
 ** stumpwm window placement

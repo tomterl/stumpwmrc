@@ -153,9 +153,9 @@ keybindings.
                                 (stumpwm::send-meta-key (current-screen) (kbd key))))
                   (cons :string  (lambda (str)
                                    (stumpwm::window-send-string str))))))
-        (loop for part in parts do 
-             (let ((op (assoc (car part) ops))) ;; select dispatch function
-               (funcall (cdr op) (cdr part))))))) ;; dispatch 
+        (loop for pair in parts do 
+             (let ((op (assoc (first pair) ops))) ;; select dispatch function
+               (funcall (cdr op) (cdr pair))))))) ;; dispatch 
 #+END_SRC
     
 *** Switch to the next tracking buffer

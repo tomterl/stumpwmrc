@@ -168,7 +168,7 @@ keybindings.
                   (old-frame (stumpwm::tile-group-current-frame group)))
              (stumpwm::focus-all win)
              (unless (eq frame old-frame)
-               (show-frame-indicator group)))))
+               (stumpwm::show-frame-indicator group)))))
       (let* ((matches (stumpwm::find-matching-windows props all-groups all-screens))
              (win (if (member (current-window) matches)
                       (current-window)

@@ -185,3 +185,12 @@ keybindings.
 #+BEGIN_SRC common-lisp
   (setf *window-info-format* "%wx%h %n (%t - %c)")
 #+END_SRC
+** Keybindings
+*** XScreenSaver
+
+#+BEGIN_SRC common-lisp 
+(define-key *top-map*   (kbd "M-C-l") "lock-screen")
+
+(defcommand lock-screen () () 
+  (run-shell-command "exec /usr/bin/xscreensaver-command -lock"))
+#+END_SRC

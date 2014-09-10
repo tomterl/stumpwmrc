@@ -44,16 +44,14 @@ wm is a much more general and cleaner way.
 
 ** Start a terminal window
 
-=urxvtd=, the terminal emulation daemon, is started by my
-=gnome-session-properties= - start a client (=urxvtc=) with the normal
-terminal emulation keybindings.
+Start a =urxvt= client; start the daemon if it is not already running.
 
 #+BEGIN_SRC common-lisp 
 (define-key *root-map*   (kbd "c") "run-term")
 (define-key *root-map*   (kbd "C-c") "run-term")
 
 (defcommand run-term () () 
-  (run-shell-command "exec /usr/bin/urxvtc"))
+  (run-shell-command "exec /usr/bin/urxvtcd"))
 #+END_SRC
 
 ** Open the =stumpwm= command line

@@ -19,15 +19,6 @@ configuration.
 #+BEGIN_SRC common-lisp
 (set-contrib-dir "/usr/local/share/stumpwm/lisp")
 #+END_SRC
-** use =stumptray.lisp=
-
-#+BEGIN_SRC common-lisp
-  (in-package :stumpwm)
-  (load-module "stumptray")
-  (stumptray:add-mode-line-hooks)
-  (in-package :stumpwm-user)
-#+END_SRC
-
 ** stumpwm window placement
 
 #+BEGIN_SRC common-lisp
@@ -63,29 +54,6 @@ terminal emulation keybindings.
 
 (defcommand run-term () () 
   (run-shell-command "exec /usr/bin/urxvtc"))
-#+END_SRC
-
-** Modeline
-
-CPU, network and date in the modeline
-
-#+BEGIN_SRC common-lisp
-  (load-module "net")
-  (load-module "cpu")
-  (setf *screen-mode-line-format*
-        (list '(:eval (run-shell-command "date '+%R, %d.%m %a'|tr -d [:cntrl:]" t)) " | %t | %c| %l | [^B%n^b] %W"))
-#+END_SRC
-
-Refresh the modeline at least every 5 seconds.
-
-#+BEGIN_SRC comon-lisp
-(setf *mode-line-timeout* 5)
-#+END_SRC
-
-*** Toggle the modeline
-
-#+BEGIN_SRC common-lisp
-(define-key *top-map* (kbd "H-m") "mode-line")
 #+END_SRC
 
 ** Open the =stumpwm= command line

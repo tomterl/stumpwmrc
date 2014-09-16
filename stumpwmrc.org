@@ -194,3 +194,21 @@ keybindings.
 (defcommand lock-screen () () 
   (run-shell-command "exec /usr/bin/xscreensaver-command -lock"))
 #+END_SRC
+
+*** Clipboard
+
+Show xfce's clipman.
+
+
+#+BEGIN_SRC common-lisp 
+(define-key *top-map*   (kbd "H-h") "show-clipman")
+
+(defcommand show-clipman () () 
+  (run-shell-command "exec /usr/bin/xfce4-popup-clipman"))
+#+END_SRC
+
+*** Modeline
+
+#+BEGIN_SRC common-lisp
+(define-key *top-map* (kbd "H-m") "mode-line")
+#+END_SRC

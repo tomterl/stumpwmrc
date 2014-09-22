@@ -42,32 +42,6 @@ wm is a much more general and cleaner way.
 (swank)
 #+END_SRC
 
-** Start a terminal window
-
-Start a =urxvt= client; start the daemon if it is not already running.
-
-#+BEGIN_SRC common-lisp 
-(define-key *root-map*   (kbd "c") "run-term")
-(define-key *root-map*   (kbd "C-c") "run-term")
-
-(defcommand run-term () () 
-  (run-shell-command "exec /usr/bin/urxvtcd"))
-#+END_SRC
-
-** Open the =stumpwm= command line
-
-#+BEGIN_SRC common-lips
-(define-key *top-map* (kbd "H-i") "colon")
-#+END_SRC
-
-** Hide the =gnome= desktop window
-
-#+BEGIN_SRC common-lisp
-  (gnewbg "Desktop")
-  (define-frame-preference "Desktop"
-    (0 nil t :class "Nautilus" :title "Desktop"))
-#+END_SRC
-
 ** Emacs
 
 As most of my time in front of a computer is spent in emacs, it
@@ -212,3 +186,21 @@ Show xfce's clipman.
 #+BEGIN_SRC common-lisp
 (define-key *top-map* (kbd "H-m") "mode-line")
 #+END_SRC
+*** Open the =stumpwm= command line
+
+#+BEGIN_SRC common-lips
+(define-key *top-map* (kbd "H-i") "colon")
+#+END_SRC
+
+*** Start a terminal window
+
+Start a =urxvt= client; start the daemon if it is not already running.
+
+#+BEGIN_SRC common-lisp 
+(define-key *root-map*   (kbd "c") "run-term")
+(define-key *root-map*   (kbd "C-c") "run-term")
+
+(defcommand run-term () () 
+  (run-shell-command "exec /usr/bin/urxvtcd"))
+#+END_SRC
+

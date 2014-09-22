@@ -204,3 +204,11 @@ Start a =urxvt= client; start the daemon if it is not already running.
   (run-shell-command "exec /usr/bin/urxvtcd"))
 #+END_SRC
 
+
+** Xmodmap
+
+I use a truly ergonomic keyboard. Set left space to Hyper, Del to Meta, ...
+
+#+BEGIN_SRC common-lisp
+(run-shell-command "/usr/bin/xmodmap ~/.xmodmap")
+#+END_SRC

@@ -17,7 +17,7 @@ configuration.
 
 ** Contrib dir
 #+BEGIN_SRC common-lisp
-(set-contrib-dir "/usr/local/share/stumpwm/lisp")
+;;(set-contrib-dir "/usr/local/share/stumpwm/lisp")
 #+END_SRC
 ** stumpwm window placement
 
